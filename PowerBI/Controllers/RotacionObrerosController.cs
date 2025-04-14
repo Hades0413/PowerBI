@@ -54,34 +54,53 @@ public class RotacionObrerosController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(IFormFile archivoExcel)
     {
+        // 1. Verificar si no se seleccionó archivo
         if (archivoExcel == null || archivoExcel.Length == 0)
         {
-            TempData["Error"] = "Por favor, seleccione un archivo Excel válido.";
+            TempData["Error"] = "Debe seleccionar un archivo Excel para cargar.";
             return RedirectToAction("Index");
         }
 
+        // 2. Verificar si el archivo no es un archivo Excel válido (.xlsx)
+        if (Path.GetExtension(archivoExcel.FileName).ToLower() != ".xlsx")
+        {
+            TempData["Error"] =
+                "El archivo seleccionado no es un archivo Excel válido. Por favor, seleccione un archivo con la extensión .xlsx.";
+            return RedirectToAction("Index");
+        }
+
+        // 3. Mostrar mensaje de progreso al procesar el archivo
+        TempData["Info"] = "El archivo está siendo cargado. Por favor, espere.";
+
         try
         {
+            // 4. Intentar leer el archivo Excel
             var registros = _excelService.LeerRotacionObreros(archivoExcel);
 
-            if (registros.Count > 0)
+            // 5. Validar que los registros no estén vacíos
+            if (registros == null || registros.Count == 0)
             {
-                await _context.RotacionObreros.AddRangeAsync(registros);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Archivo cargado correctamente.";
+                TempData["Error"] = "El archivo Excel no contiene datos válidos o está vacío.";
+                return RedirectToAction("Index");
             }
-            else
-            {
-                TempData["Error"] = "El archivo Excel no contiene datos válidos.";
-            }
+
+            // 6. Guardar los registros en la base de datos
+            await _context.RotacionObreros.AddRangeAsync(registros);
+            await _context.SaveChangesAsync();
+
+            // 7. Si todo sale bien, mostrar mensaje de éxito
+            TempData["Success"] = "Archivo cargado correctamente.";
         }
         catch (Exception ex)
         {
-            TempData["Error"] = $"Error al procesar el archivo: {ex.Message}";
+            // 8. Capturar errores y proporcionar un mensaje adecuado
+            TempData["Error"] = $"Hubo un error al procesar el archivo: {ex.Message}.";
         }
 
+        // 9. Redirigir a la vista
         return RedirectToAction("Index");
     }
+
 
     /// <summary>
     ///     Exporta los registros de obreros a un archivo Excel descargable.

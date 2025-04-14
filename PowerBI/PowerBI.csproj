@@ -7,34 +7,45 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="angular-material" Version="0.8.3" />
-        <PackageReference Include="ClosedXML" Version="0.105.0-rc" />
-        <PackageReference Include="ClosedXML.Report" Version="0.2.12-rc" />
-        <PackageReference Include="datatables.net-autofill-dt" Version="2.7.0" />
-        <PackageReference Include="datatables.net-dt" Version="2.2.2" />
-        <PackageReference Include="datatables.net-fixedcolumns-dt" Version="5.0.4" />
-        <PackageReference Include="datatables.net-fixedheader-dt" Version="4.0.1" />
-        <PackageReference Include="datatables.net-responsive-dt" Version="3.0.4" />
-        <PackageReference Include="datatables.net-searchbuilder-dt" Version="1.8.2" />
-        <PackageReference Include="DinkToPdf" Version="1.0.8" />
-        <PackageReference Include="Hangfire" Version="1.8.18" />
-        <PackageReference Include="Hangfire.RecurringJobExtensions" Version="1.1.6" />
-        <PackageReference Include="HtmlToPdfConverter" Version="1.0.2" />
-        <PackageReference Include="jquery" Version="3.7.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.4" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
-        <PackageReference Include="Microsoft.Identity.Client" Version="4.70.2" />
-        <PackageReference Include="Microsoft.PowerBI.Api" Version="4.22.0" />
-        <PackageReference Include="Microsoft.PowerBI.AspNet.Mvc" Version="1.1.11" />
-        <PackageReference Include="Microsoft.PowerBI.Core" Version="1.1.11" />
-        <PackageReference Include="SQL" Version="1.0.0.1" />
-        <PackageReference Include="SweetAlert2" Version="1.0.1" />
+        <PackageReference Include="angular-material" Version="0.8.3"/>
+        <PackageReference Include="ClosedXML" Version="0.105.0-rc"/>
+        <PackageReference Include="ClosedXML.Report" Version="0.2.12-rc"/>
+        <PackageReference Include="datatables.net-autofill-dt" Version="2.7.0"/>
+        <PackageReference Include="datatables.net-dt" Version="2.2.2"/>
+        <PackageReference Include="datatables.net-fixedcolumns-dt" Version="5.0.4"/>
+        <PackageReference Include="datatables.net-fixedheader-dt" Version="4.0.1"/>
+        <PackageReference Include="datatables.net-responsive-dt" Version="3.0.4"/>
+        <PackageReference Include="datatables.net-searchbuilder-dt" Version="1.8.2"/>
+        <PackageReference Include="DinkToPdf" Version="1.0.8"/>
+        <PackageReference Include="Hangfire" Version="1.8.18"/>
+        <PackageReference Include="Hangfire.RecurringJobExtensions" Version="1.1.6"/>
+        <PackageReference Include="HtmlToPdfConverter" Version="1.0.2"/>
+        <PackageReference Include="jquery" Version="3.7.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Identity.Client" Version="4.70.2"/>
+        <PackageReference Include="Microsoft.PowerBI.Api" Version="4.22.0"/>
+        <PackageReference Include="Microsoft.PowerBI.AspNet.Mvc" Version="1.1.11"/>
+        <PackageReference Include="Microsoft.PowerBI.Core" Version="1.1.11"/>
+        <PackageReference Include="SQL" Version="1.0.0.1"/>
+        <PackageReference Include="SweetAlert2" Version="1.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Update="Views\RotacionObreros\Index.cshtml.css">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Update="Views\RotacionObreros\Index.cshtml.js">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

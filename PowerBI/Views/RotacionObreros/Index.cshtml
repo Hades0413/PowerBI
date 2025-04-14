@@ -4,6 +4,13 @@
     ViewData["Title"] = "Rotación de Obreros";
 }
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- SweetAlert2 Script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <!-- Título de la página -->
 <div class="container">
     <h1 class="text-center">@ViewData["Title"]</h1>
@@ -99,123 +106,7 @@
     }
 </div>
 
-<!-- Estilos -->
-<style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
 
-    .container {
-        margin-top: 30px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        font-size: 2.5rem;
-        color: #3f51b5;
-    }
-
-    .mat-label {
-        font-size: 1.1rem;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        display: block;
-        color: #444;
-    }
-
-    .mat-input {
-        border-radius: 4px;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ddd;
-        background-color: #f9f9f9;
-    }
-
-    .btn {
-        background-color: #3f51b5;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 4px;
-        border: none;
-        font-size: 1rem;
-        cursor: pointer;
-        margin-top: 15px;
-    }
-
-    .btn:hover {
-        background-color: #303f9f;
-    }
-
-    .btn-success {
-        background-color: #4caf50;
-    }
-
-    .btn-success:hover {
-        background-color: #45a045;
-    }
-
-    .btn-danger {
-        background-color: #f44336;
-    }
-
-    .btn-danger:hover {
-        background-color: #d32f2f;
-    }
-
-    .employee-table {
-        margin-top: 30px;
-    }
-
-    .table {
-        width: 100%;
-        margin-top: 15px;
-        border-collapse: collapse;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .table th,
-    .table td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .table th {
-        background-color: #f1f1f1;
-        font-weight: bold;
-    }
-
-    .table tr:hover {
-        background-color: #f5f5f5;
-    }
-
-    .table td {
-        font-size: 0.95rem;
-    }
-
-    .export-buttons {
-        margin-top: 20px;
-        display: flex;
-        gap: 10px;
-    }
-
-    /* Hacer la tabla responsive */
-    .table-responsive {
-        overflow-x: auto;
-    }
-</style>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Alertas y Validaciones -->
 <script>
