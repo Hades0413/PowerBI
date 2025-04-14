@@ -1,0 +1,31 @@
+# JetBrains Rider
+.idea/
+
+# Archivos de compilación .NET
+bin/
+obj/
+
+# Archivos de usuario y configuración de Rider
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos temporales y de caché generados por Rider
+.idea/*
+.idea/.idea/
+.idea/.idea/.idea/
+
+# Logs y archivos temporales
+*.log
+*.vs
+.vscode/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Otros archivos temporales de Rider
+*.iml
+

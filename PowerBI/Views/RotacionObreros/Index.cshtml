@@ -1,0 +1,296 @@
+@model List<RotacionObrero>
+
+@{
+    ViewData["Title"] = "Rotación de Obreros";
+}
+
+<!-- Título de la página -->
+<div class="container">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+
+    <!-- Mostrar mensajes de éxito o error usando SweetAlert2 -->
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: '@TempData["Success"]'
+            });
+        </script>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '@TempData["Error"]'
+            });
+        </script>
+    }
+
+    <!-- Formulario para cargar archivo Excel -->
+    <form method="post" enctype="multipart/form-data" action="@Url.Action("Index", "RotacionObreros")" id="uploadForm">
+        <div class="form-group">
+            <label for="archivoExcel" class="mat-label">Seleccionar archivo Excel</label>
+            <input type="file" name="archivoExcel" id="archivoExcel" class="mat-input form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary mat-raised-button">Cargar</button>
+    </form>
+
+    <hr/>
+
+    <!-- Botones de Exportación (Excel y PDF) -->
+    <div class="export-buttons">
+        <a href="@Url.Action("ExportarExcel")" class="btn btn-success mat-raised-button" id="exportExcel">Exportar a
+            Excel</a>
+        <a href="@Url.Action("ExportarPDF")" class="btn btn-danger mat-raised-button" id="exportPDF">Exportar a PDF</a>
+    </div>
+
+    <hr/>
+
+    <!-- Tabla para mostrar los obreros cargados -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="employee-table">
+            <h2>Listado de Rotación de Obreros</h2>
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>Unidad</th>
+                    <th>Servicio</th>
+                    <th>Mes</th>
+                    <th>DNI</th>
+                    <th>Nombres</th>
+                    <th>Cargo</th>
+                    <th>Ingreso</th>
+                    <th>Cese</th>
+                    <th>Motivo</th>
+                    <th>Tiempo</th>
+                    <th>Permanencia</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Unidad</td>
+                        <td>@item.Servicio</td>
+                        <td>@item.Mes</td>
+                        <td>@item.NumeroPersonal</td>
+                        <td>@item.ApellidosNombres</td>
+                        <td>@item.Cargo</td>
+                        <td>@item.FechaIngreso.ToString("dd/MM/yyyy")</td>
+                        <td>@item.FechaCese.ToString("dd/MM/yyyy") ?? "N/A"</td>
+                        <td>@item.DetalleRenuncia</td>
+                        <td>@item.TiempoMeses</td>
+                        <td>@item.Permanencia</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>No se han cargado obreros.</p>
+    }
+</div>
+
+<!-- Estilos -->
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #3f51b5;
+    }
+
+    .mat-label {
+        font-size: 1.1rem;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        display: block;
+        color: #444;
+    }
+
+    .mat-input {
+        border-radius: 4px;
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+    }
+
+    .btn {
+        background-color: #3f51b5;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    .btn:hover {
+        background-color: #303f9f;
+    }
+
+    .btn-success {
+        background-color: #4caf50;
+    }
+
+    .btn-success:hover {
+        background-color: #45a045;
+    }
+
+    .btn-danger {
+        background-color: #f44336;
+    }
+
+    .btn-danger:hover {
+        background-color: #d32f2f;
+    }
+
+    .employee-table {
+        margin-top: 30px;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 15px;
+        border-collapse: collapse;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .table tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .table td {
+        font-size: 0.95rem;
+    }
+
+    .export-buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    /* Hacer la tabla responsive */
+    .table-responsive {
+        overflow-x: auto;
+    }
+</style>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Alertas y Validaciones -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Alerta de carga de archivo Excel
+        var archivoInput = document.getElementById("archivoExcel");
+        var form = document.getElementById("uploadForm");
+
+        form.addEventListener("submit", function (e) {
+            // Validar si el archivo es un archivo Excel (.xlsx)
+            var archivo = archivoInput.files[0];
+            if (!archivo) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Error',
+                    text: 'Debe seleccionar un archivo Excel para cargar.',
+                    confirmButtonText: 'Aceptar'
+                });
+            } else if (archivo.name.split('.').pop().toLowerCase() !== 'xlsx') {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Formato inválido',
+                    text: 'El archivo seleccionado no es un archivo Excel válido. Por favor, seleccione un archivo con la extensión .xlsx.',
+                    confirmButtonText: 'Aceptar'
+                });
+            } else {
+                // Muestra la alerta de carga
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Cargando...',
+                    text: 'El archivo está siendo cargado. Por favor, espere.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                var percent = 0;
+                var interval = setInterval(function () {
+                    percent += 10;
+                    Swal.getContent().querySelector('p').textContent = `Cargando: ${percent}%`;
+                    if (percent >= 100) {
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            }
+        });
+
+        // Verificar si hay datos para exportar
+        var exportExcelButton = document.getElementById("exportExcel");
+        var exportPDFButton = document.getElementById("exportPDF");
+        var tableRows = document.querySelectorAll("table tbody tr");
+
+        if (tableRows.length === 0) {
+            exportExcelButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'No hay datos para exportar',
+                    text: 'No se han cargado obreros para exportar.',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+
+            exportPDFButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'No hay datos para exportar',
+                    text: 'No se han cargado obreros para exportar.',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+        }
+    });
+</script>
